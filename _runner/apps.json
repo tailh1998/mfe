@@ -3,27 +3,24 @@
         "name": "ROOT",
         "path": "../root-config",
         "script": "npm start",
-        "color": "blue",
-        "enabled": true
+        "color": "blue"
     },
     {
         "name": "DASHBOARD",
         "path": "../apps/dashboard",
         "script": "npm start",
-        "color": "green",
-        "enabled": true
+        "color": "green"
     },
     {
         "name": "UTILITY",
         "path": "../apps/utility",
         "script": "npm start",
-        "color": "yellow",
-        "enabled": true
+        "color": "yellow"
     },
     {
-        "name": "TEST",
-        "path": "../test-service",
+        "name": "PRODUCT",
+        "path": "../apps/product",
         "script": "npm start",
-        "enabled": false
+        "color": "pink"
     }
 ]

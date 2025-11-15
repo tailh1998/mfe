@@ -1,7 +1,7 @@
 {
-  "name": "@app/utility",
+  "name": "@app/product",
   "scripts": {
-    "start": "webpack serve --port 9002 --mode=production",
+    "start": "webpack serve --port 9003 --mode=production",
     "start:standalone": "webpack serve --env standalone",
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",
@@ -56,5 +56,5 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0"
   },
-  "types": "dist/app-utility.d.ts"
+  "types": "dist/app-product.d.ts"
 }
