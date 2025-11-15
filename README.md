@@ -4,9 +4,8 @@ This project is built using **single-spa** with a **micro-frontend** architectur
 
 ## 📁 Project Structure
 
-```json
-single-spa-prototype/
-│
+```bash
+/
 ├── _runner/          # Automatically runs all micro-frontends
 ├── root-config/      # Root config registering microfrontends
 └── apps/
@@ -81,7 +80,7 @@ This will automatically start:
 
 The `apps/utility` folder contains shared UI components:
 
-```json
+```bash
 utility/src/components/button
 utility/src/components/title
 ```
