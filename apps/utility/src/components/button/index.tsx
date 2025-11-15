@@ -3,7 +3,7 @@ const Button = ({ children, onClick }) => (
     style={{ padding: "8px 16px", background: "blue", color: "white" }}
     onClick={onClick}
   >
-    {children}
+    Util BTN: {children}
   </button>
 );
 

@@ -1,32 +1,47 @@
-const apps = require("./apps.json");
+const activeApps = require("./apps.json");
 const { spawn } = require("child_process");
-
-const activeApps = apps.filter(p => p.enabled !== false);
 
 if (activeApps.length === 0) {
     console.log("No enabled apps found.");
     process.exit(1);
 }
 
-const names = activeApps.map(p => p.name).join(",");
+function runCommand(command, cwd) {
+    return new Promise((resolve, reject) => {
+        const child = spawn(command, { cwd, shell: true, stdio: "inherit" });
+        child.on("exit", (code) => {
+            if (code === 0) resolve();
+            else reject(new Error(`Command "${command}" failed with code ${code}`));
+        });
+    });
+}
 
-const colors = activeApps.map(p => p.color || "blue").join(",");
+async function main() {
+    try {
+        console.log("\nInstalling root project dependencies...");
+        await runCommand("npm install", process.cwd());
 
-const commands = activeApps
-    .map(p => `cd ${p.path} && ${p.script}`)
-    .map(cmd => `"${cmd}"`)
-    .join(" ");
+        for (const app of activeApps) {
+            console.log(`\nInstalling dependencies for ${app.name}...`);
+            await runCommand("npm install", app.path);
+        }
 
-const concurrentlyCommand = `concurrently -n "${names}" -c "${colors}" ${commands}`;
+        const names = activeApps.map(p => p.name).join(",");
+        const colors = activeApps.map(p => p.color || "blue").join(",");
+        const commands = activeApps.map(p => `cd ${p.path} && ${p.script}`).map(cmd => `"${cmd}"`).join(" ");
 
-console.log("\nRunning:", concurrentlyCommand, "\n");
+        const concurrentlyCommand = `concurrently -n "${names}" -c "${colors}" ${commands}`;
+        console.log("\nRunning:", concurrentlyCommand, "\n");
 
-// Spawn concurrently so logs stream live
-const child = spawn(concurrentlyCommand, {
-    shell: true,
-    stdio: "inherit", // pipe stdout/stderr to this terminal
-});
+        const child = spawn(concurrentlyCommand, { shell: true, stdio: "inherit" });
+        child.on("exit", (code) => {
+            console.log(`\nAll processes exited with code: ${code}`);
+        });
 
-child.on("exit", (code) => {
-    console.log(`\nAll processes exited with code: ${code}`);
-});
+    } catch (err) {
+        console.error("Error:", err);
+        process.exit(1);
+    }
+}
+
+main();
