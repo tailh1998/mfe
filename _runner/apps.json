@@ -1,0 +1,29 @@
+[
+    {
+        "name": "ROOT",
+        "path": "../root-config",
+        "script": "npm start",
+        "color": "blue",
+        "enabled": true
+    },
+    {
+        "name": "DASHBOARD",
+        "path": "../apps/dashboard",
+        "script": "npm start",
+        "color": "green",
+        "enabled": true
+    },
+    {
+        "name": "UTILITY",
+        "path": "../apps/utility",
+        "script": "npm start",
+        "color": "yellow",
+        "enabled": true
+    },
+    {
+        "name": "TEST",
+        "path": "../test-service",
+        "script": "npm start",
+        "enabled": false
+    }
+]
