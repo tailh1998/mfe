@@ -1,7 +1,7 @@
 {
   "name": "@app/dashboard",
   "scripts": {
-    "start": "webpack serve --port 9001 --mode=production",
+    "start": "webpack serve --port 3001 --mode=production",
     "start:standalone": "webpack serve --env standalone",
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",

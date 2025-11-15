@@ -1,7 +1,7 @@
 {
   "name": "@app/product",
   "scripts": {
-    "start": "webpack serve --port 9003 --mode=production",
+    "start": "webpack serve --port 3003 --mode=production",
     "start:standalone": "webpack serve --env standalone",
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",
